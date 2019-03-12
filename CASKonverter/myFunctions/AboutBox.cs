@@ -104,9 +104,5 @@ namespace CASKonverter.myFormats
         }
         #endregion
 
-        private void lb_Version_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

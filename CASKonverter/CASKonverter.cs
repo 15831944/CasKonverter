@@ -21,11 +21,13 @@ namespace CASKonverter
         private string m_FilePath;
         private string m_CommandLineArg;
         private List<Nmea.GPS_Punkt> m_lsGPS = new List<Nmea.GPS_Punkt>();
+        private myUtilities.MyConfig _config = new myUtilities.MyConfig();
 
         GSI objGSI;
         DAT objDAT;
         CSV objCSV;
         Nmea objNmea = new Nmea();
+        string value;
 
         //Konstruktor
         public CASKonverter()
@@ -38,9 +40,38 @@ namespace CASKonverter
             if (m_CommandLineArg != null)
                 DateiÖffnen(m_CommandLineArg);
 
-            //Settings
-            myUtilities.mySettings objSettings = myUtilities.mySettings.Instance;
+            //Nachkommastellen
+            value = _config.GetAppSettingString("decimals");
+            if (value == String.Empty)
+            {
+                value = "4";
+                _config.SetAppSetting("decimals", value);
+            }
+
+            nUD_decimals.Value = System.Convert.ToDecimal(_config.GetAppSettingString("decimals"));
+
+            //Einheiten
+            value = _config.GetAppSettingString("unit");
+            if (value == String.Empty)
+            {
+                value = "m";
+                _config.SetAppSetting("unit", value);
+            }
+
+            if (value == "m")
+            {
+                bt_Einheit.Text = "Meter";
+                bt_Einheit.FlatStyle = FlatStyle.System;
+                nUD_decimals.Maximum = 4;
+            }
+            else
+            {
+                bt_Einheit.Text = "Millimeter";
+                bt_Einheit.FlatStyle = FlatStyle.Popup;
+                nUD_decimals.Maximum = 1;
+            }
         }
+
 
         //Properties
         public bool isMM
@@ -128,12 +159,12 @@ namespace CASKonverter
 
                         break;
 
-                    case "log":
-                        tabPage.SelectedTab = tabPage.TabPages[6];
-                        objNmea.createGPS(sText);
-                        refreshDisplay(objNmea.lsGPSPunkte, false);
+                    //case "log":
+                    //    tabPage.SelectedTab = tabPage.TabPages[6];
+                    //    objNmea.createGPS(sText);
+                    //    refreshDisplay(objNmea.lsGPSPunkte, false);
 
-                        break;
+                    //    break;
 
                     default:
                         MessageBox.Show("nicht unterstützes Dateiformat!");
@@ -350,6 +381,8 @@ namespace CASKonverter
                 case "Meter":
                     bt_Einheit.Text = "Millimeter";
                     bt_Einheit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+                    _config.SetAppSetting("unit", "mm");
+                    nUD_decimals.Maximum = 1;
 
                     if (objDAT != null)
                     {
@@ -364,6 +397,9 @@ namespace CASKonverter
                 case "Millimeter":
                     bt_Einheit.Text = "Meter";
                     bt_Einheit.FlatStyle = FlatStyle.System;
+                    _config.SetAppSetting("unit", "m");
+                    nUD_decimals.Maximum = 4;
+                    nUD_decimals.Value += 3;
 
                     if (objDAT != null)
                     {
@@ -471,6 +507,13 @@ namespace CASKonverter
 
                 sw.Close();
             }
+        }
+
+        private void nUD_decimals_ValueChanged(object sender, EventArgs e)
+        {
+            _config.SetAppSetting("decimals", nUD_decimals.Value.ToString());
+            if(objCSV != null)
+                refreshDisplay(objCSV.vMP);
         }
     }
 }

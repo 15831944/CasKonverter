@@ -105,6 +105,8 @@
             this.panel_Einheit = new System.Windows.Forms.Panel();
             this.bt_Einheit = new System.Windows.Forms.Button();
             this.saveFileDialog_ell = new System.Windows.Forms.SaveFileDialog();
+            this.nUD_decimals = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.tableLayout.SuspendLayout();
             this.tabPage.SuspendLayout();
@@ -125,6 +127,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.panel_Einheit.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nUD_decimals)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -230,8 +233,6 @@
             this.tabPage.Controls.Add(this.tabPage_xz);
             this.tabPage.Controls.Add(this.tabPage_yz);
             this.tabPage.Controls.Add(this.tabPage_csv);
-            this.tabPage.Controls.Add(this.tabPage_ell);
-            this.tabPage.Controls.Add(this.tabPage_Grid);
             this.tabPage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabPage.Font = new System.Drawing.Font("Courier New", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage.Location = new System.Drawing.Point(3, 3);
@@ -312,13 +313,13 @@
             this.contextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.heightOffsetToolStripMenuItem});
             this.contextMenuStrip.Name = "contextMenuStrip";
-            this.contextMenuStrip.Size = new System.Drawing.Size(146, 26);
+            this.contextMenuStrip.Size = new System.Drawing.Size(181, 48);
             // 
             // heightOffsetToolStripMenuItem
             // 
             this.heightOffsetToolStripMenuItem.Enabled = false;
             this.heightOffsetToolStripMenuItem.Name = "heightOffsetToolStripMenuItem";
-            this.heightOffsetToolStripMenuItem.Size = new System.Drawing.Size(145, 22);
+            this.heightOffsetToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.heightOffsetToolStripMenuItem.Text = "Height Offset";
             this.heightOffsetToolStripMenuItem.Click += new System.EventHandler(this.heightOffsetToolStripMenuItem_Click);
             // 
@@ -780,11 +781,35 @@
             this.bt_Einheit.UseVisualStyleBackColor = true;
             this.bt_Einheit.Click += new System.EventHandler(this.bt_Einheit_Click);
             // 
+            // nUD_decimals
+            // 
+            this.nUD_decimals.Location = new System.Drawing.Point(576, 4);
+            this.nUD_decimals.Maximum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.nUD_decimals.Name = "nUD_decimals";
+            this.nUD_decimals.Size = new System.Drawing.Size(53, 20);
+            this.nUD_decimals.TabIndex = 5;
+            this.nUD_decimals.ValueChanged += new System.EventHandler(this.nUD_decimals_ValueChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(495, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(75, 13);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Kommastellen:";
+            // 
             // CASKonverter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(782, 424);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.nUD_decimals);
             this.Controls.Add(this.panel_Einheit);
             this.Controls.Add(this.tableLayout);
             this.Controls.Add(this.menuStrip1);
@@ -793,7 +818,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(500, 400);
             this.Name = "CASKonverter";
-            this.Text = "CAS Konverter  (c) 2013-2018 Rudi Matzeder";
+            this.Text = "CAS Konverter  (c) 2013-2019 Rudi Matzeder";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tableLayout.ResumeLayout(false);
@@ -827,6 +852,7 @@
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.panel_Einheit.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nUD_decimals)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -909,6 +935,8 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog_ell;
         private System.Windows.Forms.TabPage tabPage_Grid;
         private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.NumericUpDown nUD_decimals;
+        private System.Windows.Forms.Label label1;
     }
 }
 

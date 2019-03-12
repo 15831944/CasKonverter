@@ -58,7 +58,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pictureBox1.Image = global::CASKonverter.Properties.Resources.DK_Vermessung;
+            this.pictureBox1.Image = global::CASKonverter.Properties.Resources.DK_logo;
             this.pictureBox1.Location = new System.Drawing.Point(3, 3);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(424, 152);
@@ -101,7 +101,6 @@
             this.lb_Version.TabIndex = 1;
             this.lb_Version.Text = "Version";
             this.lb_Version.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.lb_Version.Click += new System.EventHandler(this.lb_Version_Click);
             // 
             // AboutBox
             // 

@@ -17,6 +17,7 @@ namespace CASKonverter.myFormats
         private DateTime m_Datum;
         private int m_PrecisionX;
         private int m_PrecisionY;
+        private int _PrecisionXY;
         private int m_PrecisionZ;
         private List<string> m_lsDat = new List<string>();
         private List<string> m_lsXZ = new List<string>();
@@ -99,6 +100,12 @@ namespace CASKonverter.myFormats
         {
             get { return m_PrecisionY; }
             set { m_PrecisionY = value; }
+        }
+
+        public int PrecisionXY
+        {
+            get { return _PrecisionXY; }
+            set { _PrecisionXY = value; }
         }
 
         public int PrecisionZ

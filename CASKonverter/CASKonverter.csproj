@@ -41,6 +41,7 @@
       <HintPath>..\..\..\Projects\Matrix library\CSML\bin\Release\CSML.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
@@ -82,6 +83,7 @@
     <Compile Include="myMath\Convert.cs" />
     <Compile Include="myMath\Landesvermessung.cs" />
     <Compile Include="myMath\Nmea.cs" />
+    <Compile Include="myUtilities\myConfig.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="myUtilities\mySettings.cs" />

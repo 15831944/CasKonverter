@@ -60,3 +60,17 @@ D:\VS2017\Windows\CASKonverter\CASKonverter\obj\x86\Debug\CASKonverter.csproj.Co
 D:\VS2017\Windows\CASKonverter\CASKonverter\obj\x86\Debug\CASKonverter.exe
 D:\VS2017\Windows\CASKonverter\CASKonverter\obj\x86\Debug\CASKonverter.pdb
 D:\VS2017\Windows\CASKonverter\CASKonverter\obj\x86\Debug\CASKonverter.csprojResolveAssemblyReference.cache
+D:\_Repository\CASKonverter\CASKonverter\bin\Debug\CASKonverter.exe.config
+D:\_Repository\CASKonverter\CASKonverter\bin\Debug\CASKonverter.exe
+D:\_Repository\CASKonverter\CASKonverter\bin\Debug\CASKonverter.pdb
+D:\_Repository\CASKonverter\CASKonverter\obj\x86\Debug\CASKonverter.CASKonverter.resources
+D:\_Repository\CASKonverter\CASKonverter\obj\x86\Debug\CASKonverter.myFormats.AboutBox.resources
+D:\_Repository\CASKonverter\CASKonverter\obj\x86\Debug\CASKonverter.myFunctions.Height_Offset.resources
+D:\_Repository\CASKonverter\CASKonverter\obj\x86\Debug\CASKonverter.myFunctions.diaSettings.resources
+D:\_Repository\CASKonverter\CASKonverter\obj\x86\Debug\CASKonverter.Properties.Resources.resources
+D:\_Repository\CASKonverter\CASKonverter\obj\x86\Debug\CASKonverter.csproj.GenerateResource.cache
+D:\_Repository\CASKonverter\CASKonverter\obj\x86\Debug\CASKonverter.csproj.CoreCompileInputs.cache
+D:\_Repository\CASKonverter\CASKonverter\obj\x86\Debug\CASKonverter.csproj.CopyComplete
+D:\_Repository\CASKonverter\CASKonverter\obj\x86\Debug\CASKonverter.exe
+D:\_Repository\CASKonverter\CASKonverter\obj\x86\Debug\CASKonverter.pdb
+D:\_Repository\CASKonverter\CASKonverter\obj\x86\Debug\CASKonverter.csprojAssemblyReference.cache

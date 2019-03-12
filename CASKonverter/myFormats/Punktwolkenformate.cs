@@ -516,6 +516,7 @@ namespace CASKonverter.myFormats
         private string m_DATyz_Text_mm = String.Empty;
         private List<Messpunkt> m_vMP = new List<Messpunkt>();
         private List<Messpunkt> m_vMP_mm = new List<Messpunkt>();
+        private myUtilities.MyConfig _config = new myUtilities.MyConfig();
 
         //Konstruktor
         public DAT(string sDat, bool isMM)
@@ -588,7 +589,8 @@ namespace CASKonverter.myFormats
         {
             bool bFehler = false;
 
-            NumberFormatInfo NumFormat = new NumberFormatInfo();
+            NumberFormatInfo nfi = new NumberFormatInfo();
+            nfi.NumberDecimalDigits = _config.GetAppSettingInt("decimals");
 
             string[] arText = m_DAT_Text.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
 
@@ -597,11 +599,11 @@ namespace CASKonverter.myFormats
                 try
                 {
                     string[] Datensatz = Zeile.Split(new Char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                    NumFormat.NumberDecimalDigits = Global.StringDigits(Datensatz[1]);
+                   // NumFormat.NumberDecimalDigits = Global.StringDigits(Datensatz[1]);
 
                     string PNum = Datensatz[0];
-                    double Rechtswert = System.Convert.ToDouble(Datensatz[1], NumFormat);
-                    double Hochwert = System.Convert.ToDouble(Datensatz[2], NumFormat);
+                    double Rechtswert = System.Convert.ToDouble(Datensatz[1], nfi);
+                    double Hochwert = System.Convert.ToDouble(Datensatz[2], nfi);
                     double? Höhe = null;
                     int PresicionX = Global.StringDigits(Datensatz[1]);
                     int PresicionY = Global.StringDigits(Datensatz[2]);
@@ -610,7 +612,7 @@ namespace CASKonverter.myFormats
                     try
                     {
                         if (Datensatz[3] != null)
-                            Höhe = System.Convert.ToDouble(Datensatz[3], NumFormat);
+                            Höhe = System.Convert.ToDouble(Datensatz[3], nfi);
                     }
                     catch { }
 
@@ -650,48 +652,21 @@ namespace CASKonverter.myFormats
         private string create_DAT(List<Messpunkt> lsMP)
         {
             string Text = String.Empty;
+            NumberFormatInfo nfi = new NumberFormatInfo();
+            nfi.NumberDecimalDigits = _config.GetAppSettingInt("decimals");
 
             for (int i = 0; i < lsMP.Count; i++)
             {
                 Messpunkt MP = lsMP[i];
-                string Format;
-                switch (MP.PrecisionX)
-                {
-                    case 1:
-                        Format = "0.0";
-                        break;
-
-                    case 2:
-                        Format = Global.Format2;
-                        break;
-                    case 3:
-                        Format = Global.Format3;
-                        break;
-
-                    case 4:
-                        Format = Global.Format4;
-                        break;
-
-                    case 5:
-                        Format = Global.Format5;
-                        break;
-
-                    default:
-                        Format = Global.Format0;
-                        break;
-                }
 
                 string Zeile = MP.NR.PadLeft(9);
 
-                Zeile += MP.Rechtswert.ToString(Format).PadLeft(13);
-                Zeile.Replace(",", ".");
-
-                Zeile += MP.Hochwert.ToString(Format).PadLeft(13);
-                Zeile.Replace(",", ".");
+                Zeile += MP.Rechtswert.ToString("F", nfi).PadLeft(13);
+                Zeile += MP.Hochwert.ToString("F", nfi).PadLeft(13);
 
                 if (MP.Höhe.HasValue)
                 {
-                    Zeile += MP.Höhe.Value.ToString(Format).PadLeft(11);
+                    Zeile += MP.Höhe.Value.ToString("F", nfi).PadLeft(11);
                 }
 
                 //Code
@@ -715,49 +690,22 @@ namespace CASKonverter.myFormats
         private string create_DATxz(List<Messpunkt> vMP)
         {
             string Text = String.Empty;
+            NumberFormatInfo nfi = new NumberFormatInfo();
+            nfi.NumberDecimalDigits = _config.GetAppSettingInt("decimals");
 
             for (int i = 0; i < vMP.Count; i++)
             {
                 Messpunkt objMP = vMP[i];
-                string Format;
-                switch (objMP.PrecisionX)
-                {
-                    case 1:
-                        Format = "0.0";
-                        break;
-
-                    case 2:
-                        Format = Global.Format2;
-                        break;
-                    case 3:
-                        Format = Global.Format3;
-                        break;
-
-                    case 4:
-                        Format = Global.Format4;
-                        break;
-
-                    case 5:
-                        Format = Global.Format5;
-                        break;
-
-                    default:
-                        Format = Global.Format0;
-                        break;
-                }
-
                 string Zeile = objMP.NR.PadLeft(9);
 
-                Zeile += objMP.Rechtswert.ToString(Format).PadLeft(13);
-                Zeile.Replace(",", ".");
+                Zeile += objMP.Rechtswert.ToString("N", nfi).PadLeft(13);
 
                 if (objMP.Höhe.HasValue)
                 {
-                    Zeile += objMP.Höhe.Value.ToString(Format).PadLeft(13);
+                    Zeile += objMP.Höhe.Value.ToString("N", nfi).PadLeft(13);
                 }
 
-                Zeile += objMP.Hochwert.ToString(Format).PadLeft(13);
-                Zeile.Replace(",", ".");
+                Zeile += objMP.Hochwert.ToString("N", nfi).PadLeft(13);
 
                 Zeile = Zeile.Replace(',', '.');
                 Zeile += "\r\n";
@@ -770,49 +718,24 @@ namespace CASKonverter.myFormats
         private string create_DATyz(List<Messpunkt> vMP)
         {
             string Text = String.Empty;
+            NumberFormatInfo nfi = new NumberFormatInfo();
+            nfi.NumberDecimalDigits = _config.GetAppSettingInt("decimals");
 
             for (int i = 0; i < vMP.Count; i++)
             {
                 Messpunkt objMP = vMP[i];
-                string Format;
-                switch (objMP.PrecisionX)
-                {
-                    case 1:
-                        Format = "0.0";
-                        break;
-
-                    case 2:
-                        Format = Global.Format2;
-                        break;
-
-                    case 3:
-                        Format = Global.Format3;
-                        break;
-
-                    case 4:
-                        Format = Global.Format4;
-                        break;
-
-                    case 5:
-                        Format = Global.Format5;
-                        break;
-
-                    default:
-                        Format = Global.Format0;
-                        break;
-                }
-
+ 
                 string Zeile = objMP.NR.PadLeft(9);
 
-                Zeile += objMP.Hochwert.ToString(Format).PadLeft(13);
+                Zeile += objMP.Hochwert.ToString("N", nfi).PadLeft(13);
                 Zeile.Replace(",", ".");
 
                 if (objMP.Höhe.HasValue)
                 {
-                    Zeile += objMP.Höhe.Value.ToString(Format).PadLeft(13);
+                    Zeile += objMP.Höhe.Value.ToString("N", nfi).PadLeft(13);
                 }
 
-                Zeile += objMP.Rechtswert.ToString(Format).PadLeft(13);
+                Zeile += objMP.Rechtswert.ToString("N", nfi).PadLeft(13);
                 Zeile.Replace(",", ".");
 
                 Zeile = Zeile.Replace(',', '.');
@@ -852,6 +775,7 @@ namespace CASKonverter.myFormats
         private List<Messpunkt> m_vMP = new List<Messpunkt>();
         private List<Messpunkt> m_vMP_mm = new List<Messpunkt>();
         private DataTable m_Table = new DataTable();
+        private myUtilities.MyConfig _config = new myUtilities.MyConfig();
 
         //Konstruktor
         public CSV(string sCSV)
@@ -907,8 +831,12 @@ namespace CASKonverter.myFormats
             m_vMP.Clear();
             bool bFehler = false;
 
-            NumberFormatInfo NumFormatX = new NumberFormatInfo();
-            NumberFormatInfo NumFormatY = new NumberFormatInfo();
+            int decimals = _config.GetAppSettingInt("decimals");
+            NumberFormatInfo NumFormatXYZ = new NumberFormatInfo();
+
+            int Xdigits, Ydigits, Zdigits;
+            int max;
+            NumberFormatInfo NumFormatXY = new NumberFormatInfo();
             NumberFormatInfo NumFormatZ = new NumberFormatInfo();
 
             string[] arText = m_CSV_Text.Split(new char[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
@@ -920,13 +848,19 @@ namespace CASKonverter.myFormats
                     string Zeile = row.Replace(',', '.');
 
                     string[] Datensatz = Zeile.Split(new Char[] { ';' }, StringSplitOptions.RemoveEmptyEntries);
-                    NumFormatX.NumberDecimalDigits = (Global.StringDigits(Datensatz[1]) > 4) ? 4 : Global.StringDigits(Datensatz[1]);
-                    NumFormatY.NumberDecimalDigits = (Global.StringDigits(Datensatz[2]) > 4) ? 4 : Global.StringDigits(Datensatz[2]);
-                    NumFormatZ.NumberDecimalDigits = (Global.StringDigits(Datensatz[3]) > 4) ? 4 : Global.StringDigits(Datensatz[3]);
+                    Xdigits = (Global.StringDigits(Datensatz[1]) > 4) ? 4 : Global.StringDigits(Datensatz[1]);
+                    Ydigits = (Global.StringDigits(Datensatz[2]) > 4) ? 4 : Global.StringDigits(Datensatz[2]);
+                    Zdigits = (Global.StringDigits(Datensatz[3]) > 4) ? 4 : Global.StringDigits(Datensatz[3]);
+
+                    max = (Xdigits >= Ydigits) ? Xdigits : Ydigits;
+                    max = (max >= Zdigits) ? max : Zdigits;
+
+                    NumFormatXY.NumberDecimalDigits = max;
+                    NumFormatZ.NumberDecimalDigits = max;
 
                     string PNum = Datensatz[0];
-                    double Rechtswert = Math.Round(System.Convert.ToDouble(Datensatz[1], NumFormatX), NumFormatX.NumberDecimalDigits);
-                    double Hochwert = Math.Round(System.Convert.ToDouble(Datensatz[2], NumFormatY), NumFormatY.NumberDecimalDigits);
+                    double Rechtswert = Math.Round(System.Convert.ToDouble(Datensatz[1], NumFormatXY), NumFormatXY.NumberDecimalDigits);
+                    double Hochwert = Math.Round(System.Convert.ToDouble(Datensatz[2], NumFormatXY), NumFormatXY.NumberDecimalDigits);
                     double? Höhe = null;
 
                     try
@@ -944,8 +878,8 @@ namespace CASKonverter.myFormats
                     }
                     catch { }
 
-                    Messpunkt objMP = new Messpunkt(PNum, Rechtswert, Hochwert, Höhe, 0,0, Code, new DateTime(), NumFormatX.NumberDecimalDigits,
-                                                                                                            NumFormatY.NumberDecimalDigits,
+                    Messpunkt objMP = new Messpunkt(PNum, Rechtswert, Hochwert, Höhe, 0,0, Code, new DateTime(), NumFormatXY.NumberDecimalDigits,
+                                                                                                            NumFormatXY.NumberDecimalDigits,
                                                                                                             NumFormatZ.NumberDecimalDigits);
                     m_vMP.Add(objMP);
                 }
@@ -994,52 +928,27 @@ namespace CASKonverter.myFormats
         private string create_CSV(List<Messpunkt> vMP)
         {
             string Text = String.Empty;
+            NumberFormatInfo nfi = new NumberFormatInfo();
+            nfi.NumberDecimalDigits = _config.GetAppSettingInt("decimals");
 
             for (int i = 0; i < vMP.Count; i++)
             {
                 Messpunkt objMP = vMP[i];
-                string Format;
-                switch (objMP.PrecisionX)
-                {
-                    case 1:
-                        Format = "0.0";
-                        break;
-
-                    case 2:
-                        Format = Global.Format2;
-                        break;
-
-                    case 3:
-                        Format = Global.Format3;
-                        break;
-
-                    case 4:
-                        Format = Global.Format4;
-                        break;
-
-                    case 5:
-                        Format = Global.Format5;
-                        break;
-
-                    default:
-                        Format = Global.Format0;
-                        break;
-                }
 
                 string Zeile = objMP.NR;
                 m_Table.Rows.Add(objMP.NR);
 
                 Zeile += ";";
 
-                Zeile += objMP.Rechtswert.ToString(Format) + ";";
+                Zeile += objMP.Rechtswert.ToString("N", nfi) + ";";
                 Zeile.Replace(",", ".");
 
-                Zeile += objMP.Hochwert.ToString(Format) + ";";
+                Zeile += objMP.Hochwert.ToString("N", nfi) + ";";
                 Zeile.Replace(",", ".");
 
                 if (objMP.Höhe.HasValue)
                 {
-                    Zeile += objMP.Höhe.Value.ToString(Format) + ";";
+                    Zeile += objMP.Höhe.Value.ToString("N", nfi) + ";";
                 }
 
                 Zeile += ";";
