@@ -74,3 +74,8 @@ D:\_Repository\CASKonverter\CASKonverter\obj\x86\Debug\CASKonverter.csproj.CopyC
 D:\_Repository\CASKonverter\CASKonverter\obj\x86\Debug\CASKonverter.exe
 D:\_Repository\CASKonverter\CASKonverter\obj\x86\Debug\CASKonverter.pdb
 D:\_Repository\CASKonverter\CASKonverter\obj\x86\Debug\CASKonverter.csprojAssemblyReference.cache
+D:\_Repository\CASKonverter\CASKonverter\bin\Debug\CASKonverter.exe.manifest
+D:\_Repository\CASKonverter\CASKonverter\bin\Debug\CASKonverter.application
+D:\_Repository\CASKonverter\CASKonverter\obj\x86\Debug\CASKonverter.TrustInfo.xml
+D:\_Repository\CASKonverter\CASKonverter\obj\x86\Debug\CASKonverter.exe.manifest
+D:\_Repository\CASKonverter\CASKonverter\obj\x86\Debug\CASKonverter.application
